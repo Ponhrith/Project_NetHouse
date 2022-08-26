@@ -1,4 +1,4 @@
-import Rpi.GPIO as GPIO #Pri.GPIO can be installed on Linux?
+import RPi.GPIO as GPIO
 import time
 
 #GPIO setup

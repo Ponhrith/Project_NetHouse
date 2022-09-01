@@ -2,11 +2,14 @@ import RPi.GPIO as GPIO
 import time
 from datetime import datetime
 from gpiozero import LED
+import socket
 
 
-channel = 21
-GPIO.setmode(GPIO.BCM)
-GPIO.setwarnings(False)
+
+#channel = 21
+#GPIO.setmode(GPIO.BCM)
+#GPIO.setwarnings(False)
+#GPIO.setup(4, GPIO.IN)
 #GPIO.setup(channel, GPIO.IN)
 #GPIO.setup(18,GPIO.OUT)
 
@@ -30,8 +33,30 @@ GPIO.setwarnings(False)
 # time.sleep(1)
 # #    break 
 
+
+
+HOST = "172.16.0.191"
+PORT = 1060
+ADDR = (HOST, PORT)
+max_size = 1024
+FORMAT = "utf-8"
 led = LED(18)
-f = open("Report.txt", "r")
+led_server = LED(17)
+
+GPIO.setmode(GPIO.BCM)
+GPIO.setup(4, GPIO.IN)
+f = open("/home/pi/Documents/Report.txt", "a")
+print("Starting the client at: ", datetime.now())
+client = socket.socket(socket.AF_INET, socket.SOCK_STREAM)
+client.connect(ADDR)
+print("""q : for close connection
+on : for turn a light on
+off: for turn a light off
+        """)
+
+
+
+
 def fun2():
     for i in range(0, 30):
         now = datetime.now()
@@ -53,52 +78,12 @@ def fun2():
 
 
 
-import socket
 
-HOST = "172.16.0.191"
-PORT = 1060
-ADDR = (HOST, PORT)
-max_size = 1024
-FORMAT = "utf-8"
-print("Starting the client at: ", datetime.now())
-client = socket.socket(socket.AF_INET, socket.SOCK_STREAM)
-client.connect(ADDR)
-
-def main():
-    # Staring a TCP socket. #
-    client = socket.socket(socket.AF_INET, socket.SOCK_STREAM)
-
-    # Connecting to the server. #
-    client.connect(ADDR)
-
-    # Opening and reading the file data. #
-    file = open("Report.txt", "r")
-    data = file.read()
-
-    # Sending the filename to the server. #
-    client.send("Report.txt".encode(FORMAT))
-    msg = client.recv(max_size).decode(FORMAT)
-    print(f"[SERVER]: {msg}")
-
-    # Sending the file data to the server. #
-    client.send(data.encode(FORMAT))
-    msg = client.recv(max_size).decode(FORMAT)
-    print(f"[SERVER]: {msg}")
-
-    # Closing the file. #
-    file.close()
-
-    # Closing the connection from the server. #
-    client.close()
-
-
-if __name__ == "__main__":
-    main()
 
 # Receiving command from your Laptop or Desktop over TCP/IP socket communication using Python and command your actuator (3)
 
 
-led_server = LED(17)
+
 def fun():
     while True:
         data = client.recv(max_size)
@@ -112,5 +97,16 @@ def fun():
                   "server replied with: ", data.decode('utf-8'))
         if data.decode('utf-8') == 'q':
             break
-
+fun2()
 fun()
+
+f = open("/home/pi/Documents/Report.txt", "r")
+data = f.read()
+client.send("Report.txt".encode(FORMAT))
+msg = client.recv(max_size).decode(FORMAT)
+print(f"server: {msg}")
+client.send(data.encode(FORMAT))
+msg = client.recv(max_size).decode(FORMAT)
+print(f"server: {msg}")
+f.close()
+client.close()

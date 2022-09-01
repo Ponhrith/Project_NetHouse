@@ -1,6 +1,7 @@
 import RPi.GPIO as GPIO
 import time
 from datetime import datetime
+from gpiozero import LED
 
 
 channel = 21
@@ -84,3 +85,20 @@ FORMAT = "utf-8"
 print("Starting the client at: ", datetime.now())
 client = socket.socket(socket.AF_INET, socket.SOCK_STREAM)
 client.connect(ADDR)
+
+led_server = LED(17)
+def fun():
+    while True:
+        data = client.recv(max_size)
+        if data.decode('utf-8') == 'on':
+            led_server.on()
+            print("light is on")
+        elif data.decode('utf-8') == 'off':
+            led_server.off()
+            print("light is off")
+            print("At ", datetime.now(),
+                  "server replied with: ", data.decode('utf-8'))
+        if data.decode('utf-8') == 'q':
+            break
+
+fun()

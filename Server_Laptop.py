@@ -34,6 +34,17 @@ while True:
 
 sock.close()
 
+
+
+# Send actuator data over TCP/IP socket communication to RaspBerry Pi Zero W (8)
+
+while True:
+    message_to_client = input("Enter message to client: ")
+    message_to_client_encode = message_to_client.encode(
+        'utf-8')
+    client.send(message_to_client_encode)
+    if message_to_client == 'q':
+        break
 # Store sensor data and datetime in a persistent media (MySQL or local file) (6)
 
 import mysql.connector
@@ -59,26 +70,4 @@ for x in f:
     cursorObject.execute(sql, val)
     dataBase.commit()
     if not end_of_file:
-        break
-
-# Send actuator data over TCP/IP socket communication to RaspBerry Pi Zero W (8)
-
-import socket
-from datetime import datetime
-HOST = socket.gethostbyname(socket.gethostname())
-PORT = 1060
-SIZE = 1024
-FORMAT = "utf-8"
-sock = socket.socket(socket.AF_INET, socket.SOCK_STREAM)
-sock.bind((HOST, PORT))
-print('Starting The Server at: ', datetime.now())
-print("Waiting For The Incoming Connection from client")
-sock.listen(5)
-client, addr = sock.accept()
-while True:
-    message_to_client = input("Enter message to client: ")
-    message_to_client_encode = message_to_client.encode(
-        'utf-8')
-    client.send(message_to_client_encode)
-    if message_to_client == 'q':
         break

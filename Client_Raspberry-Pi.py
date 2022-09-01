@@ -7,28 +7,51 @@ from gpiozero import LED
 channel = 21
 GPIO.setmode(GPIO.BCM)
 GPIO.setwarnings(False)
-GPIO.setup(channel, GPIO.IN)
-GPIO.setup(18,GPIO.OUT)
+#GPIO.setup(channel, GPIO.IN)
+#GPIO.setup(18,GPIO.OUT)
 
-f = open("Report.txt", "r")
-def callback(channel):
-    if GPIO.input(channel):
-        print("no water detected")
+#f = open("Report.txt", "r")
+# def callback(channel):
+#     if GPIO.input(channel):
+#         print("no water detected")
        
-        GPIO.output(18,GPIO.LOW)
+#         GPIO.output(18,GPIO.LOW)
         
-    else:
-        print("water detected")
-        GPIO.output(18,GPIO.HIGH)
+#     else:
+#         print("water detected")
+#         GPIO.output(18,GPIO.HIGH)
         
 
-GPIO.add_event_detect(channel, GPIO.BOTH, bouncetime=300) # let us know when pin goes HIGH or LOW
-GPIO.add_event_callback(channel, callback) #assign function to GPIO PIN, Run function on change
+# GPIO.add_event_detect(channel, GPIO.BOTH, bouncetime=300) # let us know when pin goes HIGH or LOW
+# GPIO.add_event_callback(channel, callback) #assign function to GPIO PIN, Run function on change
 
-#infinite loop
-#while True:
-time.sleep(1)
-#    break 
+# #infinite loop
+# #while True:
+# time.sleep(1)
+# #    break 
+
+led = LED(18)
+f = open("Report.txt", "r")
+def fun2():
+    for i in range(0, 30):
+        now = datetime.now()
+        current_time = now.strftime("%H:%M:%S")
+        time.sleep(1)
+        if GPIO.input(4) == 1:
+            detect = "\nWater Detected  " + str(current_time)
+            f.write(detect)
+
+            # Command one actuator using RaspBerry Pi Zero W GPIO (4)
+            
+            led.on()
+            print(detect)
+        elif GPIO.input(4) == 0:
+            not_detected = "\nWater Not Detected " + str(current_time)
+            f.write(not_detected)
+            print(not_detected)
+            led.off()
+
+
 
 import socket
 
@@ -53,7 +76,7 @@ def main():
     data = file.read()
 
     # Sending the filename to the server. #
-    client.send("from client.txt".encode(FORMAT))
+    client.send("Report.txt".encode(FORMAT))
     msg = client.recv(max_size).decode(FORMAT)
     print(f"[SERVER]: {msg}")
 
@@ -74,17 +97,6 @@ if __name__ == "__main__":
 
 # Receiving command from your Laptop or Desktop over TCP/IP socket communication using Python and command your actuator (3)
 
-
-import socket
-
-HOST = "172.16.0.191"
-PORT = 1060
-ADDR = (HOST, PORT)
-max_size = 1024
-FORMAT = "utf-8"
-print("Starting the client at: ", datetime.now())
-client = socket.socket(socket.AF_INET, socket.SOCK_STREAM)
-client.connect(ADDR)
 
 led_server = LED(17)
 def fun():

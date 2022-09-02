@@ -57,7 +57,7 @@ off: for turn a light off
 
 
 
-def fun2():
+def command():
     for i in range(0, 30):
         now = datetime.now()
         current_time = now.strftime("%H:%M:%S")
@@ -84,7 +84,7 @@ def fun2():
 
 
 
-def fun():
+def received():
     while True:
         data = client.recv(max_size)
         if data.decode('utf-8') == 'on':
@@ -97,8 +97,8 @@ def fun():
                   "server replied with: ", data.decode('utf-8'))
         if data.decode('utf-8') == 'q':
             break
-fun2()
-fun()
+command()
+received()
 
 f = open("/home/pi/Documents/Report.txt", "r")
 data = f.read()

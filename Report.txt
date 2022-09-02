@@ -1,38 +1,31 @@
 
-Water Not Detected 18:47:19
-Water Not Detected 18:47:20
-Water Not Detected 18:47:21
-Water Not Detected 18:47:22
-Water Not Detected 18:47:23
-Water Not Detected 18:47:24
-Water Not Detected 18:47:25
-Water Not Detected 18:47:26
-Water Not Detected 18:47:27
-Water Not Detected 18:47:28
-Water Not Detected 18:47:29
-Water Not Detected 18:47:30
-Water Not Detected 18:47:31
-Water Not Detected 18:47:32
-Water Not Detected 18:47:33
-Water Not Detected 18:47:34
-Water Not Detected 18:47:35
-Water Not Detected 18:47:36
-Water Not Detected 18:47:37
-Water Not Detected 18:47:38
-Water Not Detected 18:47:39
-Water Not Detected 18:47:40
-Water Not Detected 18:47:41
-Water Not Detected 18:47:42
-Water Not Detected 18:47:43
-Water Not Detected 18:47:44
-Water Not Detected 18:47:45
-Water Not Detected 18:47:46
-Water Not Detected 18:47:47
-Water Not Detected 18:47:48
-Water Not Detected 12:58:14
-Water Not Detected 12:58:15
-Water Not Detected 12:58:16
-Water Not Detected 12:58:17
-Water Not Detected 12:58:18
-Water Not Detected 12:58:19
-Water Not Detec
+Water Detected  14:15:55
+Water Detected  14:15:56
+Water Detected  14:15:57
+Water Detected  14:15:58
+Water Detected  14:15:59
+Water Detected  14:16:00
+Water Detected  14:16:01
+Water Detected  14:16:02
+Water Detected  14:16:03
+Water Detected  14:16:04
+Water Detected  14:16:05
+Water Not Detected 14:16:06
+Water Detected  14:16:07
+Water Detected  14:16:08
+Water Detected  14:16:09
+Water Detected  14:16:10
+Water Detected  14:16:11
+Water Detected  14:16:12
+Water Detected  14:16:13
+Water Detected  14:16:14
+Water Detected  14:16:15
+Water Detected  14:16:16
+Water Detected  14:16:17
+Water Detected  14:16:18
+Water Detected  14:16:19
+Water Detected  14:16:20
+Water Detected  14:16:21
+Water Detected  14:16:22
+Water Detected  14:16:23
+Water Detected  14:16:24

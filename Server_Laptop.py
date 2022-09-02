@@ -1,6 +1,7 @@
 import mysql.connector
 import socket
 from datetime import datetime
+
 HOST = socket.gethostbyname(socket.gethostname())
 PORT = 1060
 SIZE = 1024
@@ -8,7 +9,7 @@ FORMAT = "utf-8"
 sock = socket.socket(socket.AF_INET, socket.SOCK_STREAM)
 sock.bind((HOST, PORT))
 print('Starting The Server at: ', datetime.now())
-print("Waiting For The Incoming Connection from client")
+print("Waiting to accept a new connection")
 sock.listen(5)
 client, addr = sock.accept()
 print("""q : for close connection
@@ -19,7 +20,7 @@ off: for turn the light off
 # Send actuator data over TCP/IP socket communication to RaspBerry Pi Zero W (8)
 
 while True:
-    message_to_client = input("Enter message to client: ")
+    message_to_client = input("Command the actuator: ")
     message_to_client_encode = message_to_client.encode(
         'utf-8')
     client.send(message_to_client_encode)

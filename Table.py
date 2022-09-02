@@ -1,5 +1,5 @@
 # Store sensor data and datetime in a persistent media (MySQL or local file) (6)
-
+import mysql.connector
 dataBase = mysql.connector.connect(
 
     host="localhost",

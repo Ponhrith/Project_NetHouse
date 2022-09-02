@@ -64,7 +64,7 @@ dataBase = mysql.connector.connect(
 
 
 cursorObject = dataBase.cursor()
-f = open("Light sensor.txt", "r")
+f = open("Report.txt", "r")
 end_of_file = f.readline()
 for x in f:
     res = x.split()

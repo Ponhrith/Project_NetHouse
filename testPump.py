@@ -5,6 +5,8 @@ from gpiozero import LED
 import socket
 
 led = LED(18)
+GPIO.setmode(GPIO.BCM)
+GPIO.setup(4, GPIO.IN)
 
 def command():
     for i in range(0, 30):

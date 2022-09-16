@@ -69,7 +69,7 @@ f = open("Report.txt", "r")
 end_of_file = f.readline()
 for x in f:
     res = x.split()
-    sql = "INSERT INTO tbl_STUDENT (NAME, EMAIL) VALUES (%s, %s)"
+    sql = "INSERT INTO STUDENT (NAME, EMAIL) VALUES (%s, %s)"
     val = (str(res[0]), str(res[1]))
     cursorObject.execute(sql, val)
     dataBase.commit()

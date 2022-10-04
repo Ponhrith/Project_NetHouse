@@ -1,29 +1,35 @@
 import RPi.GPIO as GPIO
-import time
 from datetime import datetime
-from gpiozero import LED
-import socket
+import time
 
-led = LED(23)
+RelayPin = 4
+Sensor = 23
+
 GPIO.setmode(GPIO.BCM)
-GPIO.setup(4, GPIO.IN)
+
+GPIO.setup(RelayPin,GPIO.OUT,initial=GPIO.LOW)
+GPIO.setup(Sensor,GPIO.IN)
+    
+
+
+
 
 def command():
     for i in range(0, 30):
         now = datetime.now()
         current_time = now.strftime("%H:%M:%S")
         time.sleep(1)
-        if GPIO.input(4) == 1:
+        if GPIO.input(Sensor) == 1:
             detect = "\nWater Detected  " + str(current_time)
   
 
             # Command one actuator using RaspBerry Pi Zero W GPIO (4)
             
-            led.on()
+            GPIO.output(RelayPin,GPIO.LOW)
             print(detect)
-        elif GPIO.input(4) == 0:
+        elif GPIO.input(Sensor) == 0:
             not_detected = "\nWater Not Detected " + str(current_time)
             print(not_detected)
-            led.off()
+            GPIO.output(RelayPin,GPIO.HIGH)
 
 command()
